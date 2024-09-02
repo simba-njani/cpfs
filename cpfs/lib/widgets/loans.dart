@@ -1,3 +1,4 @@
+import 'package:cpfs/confirm/LoanApprovalPage.dart';
 import 'package:flutter/material.dart';
 
 class LoanCard extends StatelessWidget {
@@ -5,8 +6,16 @@ class LoanCard extends StatelessWidget {
   final String name;
   final double amount;
   final double interestAmount;
+  final int loanId;
 
-  const LoanCard({super.key, required this.type, required this.name, required this.amount, required this.interestAmount,});
+  const LoanCard({
+    super.key,
+    required this.type,
+    required this.name,
+    required this.amount,
+    required this.interestAmount,
+    required this.loanId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +39,20 @@ class LoanCard extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                // Approve loan logic here
+                // Navigate to LoanApprovalPage with loan details
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoanApprovalPage(
+                      type: type,
+                      name: name,
+                      amount: amount,
+                      interestAmount: interestAmount,
+                      loanId: loanId,
+                    ),
+                  ),
+                );
               },
-              
               child: const Text('Approve Loan'),
             ),
           ],
